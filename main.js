@@ -16,6 +16,31 @@ const totalApplications = document.getElementById("totalApplications");
 const appliedCount = document.getElementById("appliedCount");
 const interviewCount = document.getElementById("interviewCount");
 const selectedCount = document.getElementById("selectedCount");
+const navbarContent = document.getElementById("navbarContent");
+const navbarToggleIcon = document.getElementById("navbarToggleIcon");
+
+// Change ☰ to ✕ when menu opens
+navbarContent.addEventListener("shown.bs.collapse", () => {
+    navbarToggleIcon.classList.remove("bi-list");
+    navbarToggleIcon.classList.add("bi-x");
+});
+
+// Change ✕ back to ☰ when menu closes
+navbarContent.addEventListener("hidden.bs.collapse", () => {
+    navbarToggleIcon.classList.remove("bi-x");
+    navbarToggleIcon.classList.add("bi-list");
+});
+
+// Close mobile menu when a navigation link is clicked
+document.querySelectorAll("#navbarContent .nav-link").forEach(link => {
+    link.addEventListener("click", () => {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarContent);
+
+        if (bsCollapse) {
+            bsCollapse.hide();
+        }
+    });
+});
 
 // ================================
 // LOCAL STORAGE
